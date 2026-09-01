@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Date ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    width:100%;
+    min-height:100vh;
+    overflow:hidden;
+    color:white;
+    text-align:center;
+    font-family:'Poppins',sans-serif;
+}
+
+/* BACKGROUND VIDEO */
+
+#bgVideo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.20);
+    z-index:-1;
+}
+
+/* ALL PAGES */
+
+.page{
+    display:none;
+    width:100%;
+    min-height:100vh;
+    padding:25px 15px;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+}
+
+.page.active{
+    display:flex;
+}
+
+/* SAME PINK GLASS BOX */
+
+.box{
+    border:3px solid #ff4f9a;
+    border-radius:22px;
+    background:rgba(40,40,40,.42);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+
+    box-shadow:
+        0 0 12px rgba(255,79,154,.55),
+        inset 0 0 10px rgba(255,79,154,.15);
+
+    padding:14px 22px;
+}
+
+/* STYLISH HEADINGS */
+
+.title,
+.foodTitle,
+.confirmTitle,
+.finalTitle{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    letter-spacing:1px;
+
+    text-shadow:
+        0 2px 8px rgba(255,79,154,.65),
+        0 0 15px rgba(255,79,154,.35);
+}
+
+.title{
+    font-size:32px;
+}
+
+.subtitle{
+    font-family:'Poppins',sans-serif;
+    font-size:18px;
+    font-weight:500;
+    line-height:1.7;
+    letter-spacing:.3px;
+
+    text-shadow:0 1px 5px rgba(0,0,0,.8);
+}
+
+/* BUTTON */
+
+button{
+    color:white;
+    font-family:'Poppins',sans-serif;
+    font-size:18px;
+    font-weight:600;
+
+    border:3px solid #ff4f9a;
+    border-radius:18px;
+
+    background:rgba(40,40,40,.45);
+
+    padding:14px 28px;
+    margin:6px;
+
+    box-shadow:0 0 12px rgba(255,79,154,.5);
+
+    cursor:pointer;
+    transition:.25s;
+}
+
+button:hover{
+    box-shadow:0 0 22px rgba(255,79,154,.85);
+    transform:translateY(-2px);
+}
+
+button:active{
+    transform:scale(.94);
+}
+
+.pink{
+    background:rgba(255,70,145,.60);
+}
+
+/* PAGE 2 DATE */
+
+.dateRow{
+    display:flex;
+    gap:18px;
+    justify-content:center;
+}
+
+.dateBox{
+    width:215px;
+    padding:14px 10px;
+}
+
+.label{
+    display:inline-block;
+
+    border:3px solid #ff4f9a;
+    border-radius:15px;
+
+    padding:8px 17px;
+    margin-bottom:10px;
+
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:16px;
+
+    background:rgba(40,40,40,.30);
+
+    box-shadow:0 0 10px rgba(255,79,154,.35);
+}
+
+.selectBox{
+    width:100%;
+
+    border:3px solid #ff4f9a;
+    border-radius:15px;
+
+    padding:12px 8px;
+
+    background:rgba(255,120,170,.35);
+    color:white;
+
+    font-family:'Poppins',sans-serif;
+    font-size:16px;
+    font-weight:600;
+
+    outline:none;
+}
+
+.selectBox option{
+    color:black;
+}
+
+/* PAGE 3 FOOD */
+
+.foodTitle{
+    font-size:31px;
+}
+
+.foodGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+
+    gap:14px;
+
+    width:100%;
+    max-width:500px;
+}
+
+.option{
+    border:3px solid #ff4f9a;
+    border-radius:18px;
+
+    background:rgba(40,40,40,.45);
+
+    padding:15px 8px;
+
+    font-family:'Poppins',sans-serif;
+    font-size:17px;
+    font-weight:600;
+
+    box-shadow:0 0 12px rgba(255,79,154,.45);
+
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover{
+    box-shadow:0 0 20px rgba(255,79,154,.8);
+}
+
+.option:active{
+    transform:scale(.94);
+}
+
+.option.selected{
+    background:rgba(255,70,145,.75);
+    box-shadow:0 0 22px #ff4f9a;
+}
+
+/* PAGE 4 */
+
+.confirmTitle{
+    font-size:36px;
+}
+
+.loveText{
+    font-family:'Poppins',sans-serif;
+    font-size:18px;
+    font-weight:500;
+    line-height:1.8;
+
+    text-shadow:0 1px 5px rgba(0,0,0,.8);
+}
+
+/* PAGE 5 */
+
+.finalTitle{
+    font-size:34px;
+}
+
+.finalMessage{
+    max-width:420px;
+
+    font-family:'Poppins',sans-serif;
+    font-size:18px;
+    font-weight:500;
+
+    line-height:1.9;
+
+    text-shadow:0 1px 5px rgba(0,0,0,.8);
+}
+
+/* HEART */
+
+.heart{
+    font-size:65px;
+
+    animation:heartBeat 1s infinite;
+
+    filter:drop-shadow(
+        0 0 12px rgba(255,79,154,.8)
+    );
+}
+
+@keyframes heartBeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.18);
+    }
+
+}
+
+/* RIPPLE */
+
+.ripple{
+    position:fixed;
+
+    width:25px;
+    height:25px;
+
+    border:3px solid #ff4f9a;
+    border-radius:50%;
+
+    pointer-events:none;
+
+    animation:ripple .6s ease-out forwards;
+
+    z-index:9999;
+}
+
+@keyframes ripple{
+
+    from{
+        transform:scale(.5);
+        opacity:1;
+    }
+
+    to{
+        transform:scale(5);
+        opacity:0;
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .page{
+        padding:20px 12px;
+        gap:17px;
+    }
+
+    .title{
+        font-size:29px;
+    }
+
+    .subtitle{
+        font-size:16px;
+    }
+
+    .dateRow{
+        gap:10px;
+    }
+
+    .dateBox{
+        width:44vw;
+    }
+
+    .foodTitle{
+        font-size:27px;
+    }
+
+    .foodGrid{
+        gap:10px;
+    }
+
+    .option{
+        font-size:15px;
+        padding:14px 5px;
+    }
+
+    button{
+        font-size:16px;
+        padding:13px 21px;
+    }
+
+    .confirmTitle{
+        font-size:31px;
+    }
+
+    .loveText,
+    .finalMessage{
+        font-size:16px;
+    }
+
+    .finalTitle{
+        font-size:29px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO -->
+
+<video id="bgVideo" autoplay muted loop playsinline>
+    <source src="1000015509.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+
+<!-- ================================================= -->
+<!-- PAGE 1 -->
+<!-- ================================================= -->
+
+<section class="page active" id="page1">
+
+    <div class="box title">
+        ❤️
+    </div>
+
+    <div class="box title">
+        Will You Be My Date? 💋
+    </div>
+
+    <div class="box subtitle">
+
+        I wanted to ask you something small... 🥺💕
+
+        <br>
+
+        Will you spend a beautiful day with me? ❤️
+
+    </div>
+
+    <div>
+
+        <button class="pink" onclick="goPage(2)">
+            YES ❤️
+        </button>
+
+        <button id="noBtn">
+            NO 😏
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- PAGE 2 -->
+<!-- ================================================= -->
+
+<section class="page" id="page2">
+
+    <div class="box title">
+        Let's Plan Our Date 💕
+    </div>
+
+    <div class="box subtitle">
+        Which day and what time should we meet? 😘
+    </div>
+
+
+    <div class="dateRow">
+
+        <div class="box dateBox">
+
+            <div class="label">
+                DATE 📅
+            </div>
+
+            <select class="selectBox">
+
+                <option>Select Date</option>
+
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+                <option>29</option>
+                <option>30</option>
+                <option>31</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="box dateBox">
+
+            <div class="label">
+                TIME ⏰
+            </div>
+
+            <select class="selectBox">
+
+                <option>Select Time</option>
+
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+                <option>1:00 PM</option>
+                <option>2:00 PM</option>
+                <option>3:00 PM</option>
+                <option>4:00 PM</option>
+                <option>5:00 PM</option>
+                <option>6:00 PM</option>
+                <option>7:00 PM</option>
+                <option>8:00 PM</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="box dateBox">
+
+        <div class="label">
+            YEAR 📅
+        </div>
+
+        <select class="selectBox">
+
+            <option>Select Year</option>
+
+            <option>2026</option>
+            <option>2027</option>
+            <option>2028</option>
+            <option>2029</option>
+
+        </select>
+
+    </div>
+
+
+    <button class="pink" onclick="goPage(3)">
+        NEXT 💕
+    </button>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- PAGE 3 -->
+<!-- ================================================= -->
+
+<section class="page" id="page3">
+
+    <div class="box foodTitle">
+        What Should We Eat? 🍴
+    </div>
+
+    <div class="box subtitle">
+        Choose your favorite food 😋❤️
+    </div>
+
+
+    <div class="foodGrid">
+
+        <div class="option" onclick="selectFood(this)">
+            🍕 Pizza
+        </div>
+
+        <div class="option" onclick="selectFood(this)">
+            🍔 Burgers
+        </div>
+
+        <div class="option" onclick="selectFood(this)">
+            🍜 Noodles
+        </div>
+
+        <div class="option" onclick="selectFood(this)">
+            🌮 Tacos
+        </div>
+
+        <div class="option" onclick="selectFood(this)">
+            🍟 French Fries
+        </div>
+
+        <div class="option" onclick="selectFood(this)">
+            🍗 Fried Chicken
+        </div>
+
+    </div>
+
+
+    <button class="pink" onclick="goPage(4)">
+        CONFIRM DATE 💕
+    </button>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- PAGE 4 -->
+<!-- ================================================= -->
+
+<section class="page" id="page4">
+
+    <div class="box confirmTitle">
+        Date Confirmed! 💕
+    </div>
+
+    <div class="box loveText">
+
+        Yay! 🥳❤️
+
+        <br><br>
+
+        Our date is officially confirmed! 😘
+
+        <br>
+
+        I am really excited to spend
+        that special day with you! 💕
+
+        <br><br>
+
+        I hope that day becomes
+        a beautiful and special
+        memory for both of us. 🥰❤️
+
+    </div>
+
+    <button class="pink" onclick="goPage(5)">
+        One More Thing... 💕
+    </button>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- PAGE 5 -->
+<!-- ================================================= -->
+
+<section class="page" id="page5">
+
+    <div class="heart">
+        ❤️
+    </div>
+
+    <div class="box finalTitle">
+        One Last Thing... 💕
+    </div>
+
+
+    <div class="box finalMessage">
+
+        I am really happy
+        that you said YES! 🥺❤️
+
+        <br><br>
+
+        I hope every moment
+        we spend together
+        becomes special. 🌸
+
+        <br><br>
+
+        This little date may be
+        just a small plan...
+        but for me,
+        it means a lot. ❤️
+
+        <br><br>
+
+        I am waiting to meet you,
+        laugh with you,
+        and make some beautiful
+        memories together. 😘💕
+
+        <br><br>
+
+        <b>You are truly special to me. ❤️</b>
+
+    </div>
+
+
+    <button class="pink" onclick="showLove()">
+        LOVE YOU ❤️
+    </button>
+
+</section>
+
+
+<script>
+
+/* ============================= */
+/* PAGE CHANGE */
+/* ============================= */
+
+function goPage(number){
+
+    document.querySelectorAll(".page").forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+    document.getElementById("page" + number)
+        .classList.add("active");
+
+}
+
+
+/* ============================= */
+/* NO BUTTON */
+/* ============================= */
+
+const noBtn =
+    document.getElementById("noBtn");
+
+let noCount = 0;
+
+noBtn.addEventListener(
+    "pointerdown",
+    function(e){
+
+        e.preventDefault();
+
+        noCount++;
+
+        const scales = [
+            0.85,
+            0.72,
+            0.60,
+            0.50
+        ];
+
+        if(noCount <= 4){
+
+            const moveX =
+                Math.random() * 120 - 60;
+
+            const moveY =
+                Math.random() * 100 - 50;
+
+            noBtn.style.transform =
+                "translate(" +
+                moveX +
+                "px," +
+                moveY +
+                "px) scale(" +
+                scales[noCount - 1] +
+                ")";
+
+        }
+
+        else{
+
+            noBtn.style.display = "none";
+
+            const nextButton =
+                document.createElement("button");
+
+            nextButton.className = "pink";
+
+            nextButton.innerHTML =
+                "Okay, Let's Go 💕";
+
+            nextButton.onclick =
+                function(){
+
+                    goPage(2);
+
+                };
+
+            noBtn.parentElement
+                .appendChild(nextButton);
+
+        }
+
+    }
+);
+
+
+/* ============================= */
+/* FOOD SELECT */
+/* ============================= */
+
+function selectFood(element){
+
+    document.querySelectorAll(".option")
+        .forEach(function(item){
+
+            item.classList.remove("selected");
+
+        });
+
+    element.classList.add("selected");
+
+}
+
+
+/* ============================= */
+/* RIPPLE EFFECT */
+/* ============================= */
+
+document.addEventListener(
+    "pointerdown",
+    function(e){
+
+        const ripple =
+            document.createElement("div");
+
+        ripple.className = "ripple";
+
+        ripple.style.left =
+            (e.clientX - 12) + "px";
+
+        ripple.style.top =
+            (e.clientY - 12) + "px";
+
+        document.body.appendChild(ripple);
+
+        setTimeout(
+            function(){
+
+                ripple.remove();
+
+            },
+            600
+        );
+
+    }
+);
+
+
+/* ============================= */
+/* FINAL LOVE MESSAGE */
+/* ============================= */
+
+function showLove(){
+
+    document.getElementById("page5")
+        .innerHTML = `
+
+        <div class="heart">
+            ❤️
+        </div>
+
+        <div class="box finalTitle">
+            I Love You So Much! ❤️
+        </div>
+
+        <div class="box finalMessage">
+
+            You are truly
+            very special to me. 🥺💕
+
+            <br><br>
+
+            Thank you for coming
+            all the way to the last
+            page of this little website. 😘
+
+            <br><br>
+
+            Now all that's left
+            is to wait for our
+            special day... 🌸❤️
+
+            <br><br>
+
+            <b>
+                See you on our Date! 💕🥰
+            </b>
+
+        </div>
+
+    `;
+
+}
+
+</script>
+
+</body>
+  </html>
